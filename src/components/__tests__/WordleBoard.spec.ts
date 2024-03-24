@@ -4,8 +4,9 @@ import { VICTORY_MESSAGE } from '@/settings'
 import { DEFEAT_MESSAGE } from '@/settings'
 
 describe('HelloWordle', () => {
+  let wordOfTheDay = "TESTS"
   test("a victory message appears when the user makes a guess that matches the word of the day", async() => {
-    const wrapper = mount(WordleBoard, { props: { wordOfTheDay: "TESTS" } })
+    const wrapper = mount(WordleBoard, { props: { wordOfTheDay } })
 
     const guessInput = wrapper.find("input[type='text']")
     await guessInput.setValue("TESTS")
@@ -15,7 +16,7 @@ describe('HelloWordle', () => {
   })
 
   test("a defeat message appears if the user makes a guess that is incorrect", async() => {
-    const wrapper = mount(WordleBoard, { props: { wordOfTheDay: "TESTS" } })
+    const wrapper = mount(WordleBoard, { props: { wordOfTheDay } })
 
     const guessInput = wrapper.find("input[type='text']")
     await guessInput.setValue("WRONG")
