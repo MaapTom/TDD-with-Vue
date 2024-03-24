@@ -37,6 +37,10 @@ describe('HelloWordle', () => {
 
 
   describe("Rules for defining the word of the day", () => {
+    beforeEach(() => {
+      console.warn = vi.fn()
+    })
+
     test.each(
       [
         { wordOfTheDay: "FLY", reason: "word-of-the-day must have 5 characters" },
