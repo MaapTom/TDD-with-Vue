@@ -39,18 +39,17 @@ describe('HelloWordle', () => {
   describe("Rules for defining the word of the day", () => {
     test.each(
       [
-        "FLY",
-        "tests",
-        "QWERT"
+        { wordOfTheDay: "FLY", reason: "word-of-the-day must have 5 characters" },
+        { wordOfTheDay: "tests", reason: "word-of-the-day must be all in uppercase" },
+        { wordOfTheDay: "QWERT", reason: "word-of-the-day be a valid English word" }
       ]
-    )("If '%s' provided, a warning is emitted", async(wordOfTheDay: string) => {
+    )("Since $reason: $wordOfTheDay is invalid, therefore a warning must be emitted", async({ wordOfTheDay }) => {
       console.warn = vi.fn()
-  
       mount(WordleBoard, { props: { wordOfTheDay }})
   
       expect(console.warn).toHaveBeenCalled();
     })
-  
+
     test("No warning is emitted if the word of the day provided is a real uppercase English word with 5 characters", async() => {
       console.warn = vi.fn()
   
