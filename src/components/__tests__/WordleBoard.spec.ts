@@ -48,15 +48,12 @@ describe('HelloWordle', () => {
         { wordOfTheDay: "QWERT", reason: "word-of-the-day be a valid English word" }
       ]
     )("Since $reason: $wordOfTheDay is invalid, therefore a warning must be emitted", async({ wordOfTheDay }) => {
-      console.warn = vi.fn()
       mount(WordleBoard, { props: { wordOfTheDay }})
   
       expect(console.warn).toHaveBeenCalled();
     })
 
     test("No warning is emitted if the word of the day provided is a real uppercase English word with 5 characters", async() => {
-      console.warn = vi.fn()
-  
       mount(WordleBoard, { props: { wordOfTheDay: "TESTS" } })
   
       expect(console.warn).not.toHaveBeenCalled()
@@ -64,7 +61,11 @@ describe('HelloWordle', () => {
   })
 
   describe("Player input", () => {
-    test.todo("Player guesses are limited to 5 letters")
+    test("Player guesses are limited to 5 letters", async() => {
+      await playerSubmitsGuess(wordOfTheDay + "EXTRA")
+
+      expect(wrapper.text()).toContain(VICTORY_MESSAGE)
+    }),
     test.todo("Player guesses can only be submitted if they are real words")
     test.todo("Player guesses are not case-sensitive")
     test.todo("Player guesses can only contain letters")
