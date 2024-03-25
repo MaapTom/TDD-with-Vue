@@ -66,7 +66,12 @@ describe('HelloWordle', () => {
 
       expect(wrapper.text()).toContain(VICTORY_MESSAGE)
     }),
-    test.todo("Player guesses can only be submitted if they are real words")
+    test("Player guesses can only be submitted if they are real words", async () => {
+      await playerSubmitsGuess("QWERT")
+
+      expect(wrapper.text()).not.toContain(VICTORY_MESSAGE)
+      expect(wrapper.text()).not.toContain(DEFEAT_MESSAGE)
+    })
     test.todo("Player guesses are not case-sensitive")
     test.todo("Player guesses can only contain letters")
   })
