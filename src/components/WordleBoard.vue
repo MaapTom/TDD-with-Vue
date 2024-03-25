@@ -18,7 +18,7 @@ const formattedGuessInProgress = computed({
     return guessInProgress.value
   },
   set(rawValue: string) {
-    guessInProgress.value = rawValue.slice(0,5)
+    guessInProgress.value = rawValue.slice(0,5).toUpperCase()
   }
 })
 
